@@ -7,6 +7,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class ChapterTest {
+    private static final String CHAPTER_NAME = "Chapter 5";
+    private static final String CHAPTER_NUMBER = "5";
+
     @Test
     public void newChapterShouldBeDescribedByNameAndNumber() {
         // arrange

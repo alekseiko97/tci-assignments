@@ -3,10 +3,19 @@ package book_chapter_assignment;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class BookTest {
+
+    private static final String BOOK_NAME = "Harry Potter";
+    private static final String BOOK_AUTHOR = "J.K. Rowling";
+    private static final String CHAPTER_NAME = "Chapter 5";
+    private static final String CHAPTER_NUMBER = "5";
 
     @Test
     public void newBookShouldBeDescribedWithAuthorAndName() {
@@ -22,7 +31,7 @@ public class BookTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void creatingNewBookWithEmptyAuthorAndNameShouldThrowAnException() {
-        // arrange
+        // arrange and act
         new Book("", "");
     }
 
@@ -30,11 +39,10 @@ public class BookTest {
     @Test
     public void addingNewChapterToTheBookShouldBeSuccessful() {
         // arrange
-        Chapter chapter = mock(Chapter.class);
         Book book = new Book(BOOK_NAME, BOOK_AUTHOR);
 
         // act
-        book.addChapter(chapter);
+        book.addChapter(CHAPTER_NAME, CHAPTER_NUMBER);
 
         // assert
         Assert.assertEquals(1, book.getNumberOfChapters());
@@ -43,7 +51,6 @@ public class BookTest {
     @Test
     public void creatingAndAddingNewChapterWithParametersShouldBeSuccessful() {
         // arrange
-        Chapter chapter = new Chapter(CHAPTER_NAME, CHAPTER_NUMBER);
         Book book = new Book(BOOK_NAME, BOOK_AUTHOR);
 
         // act
@@ -57,37 +64,25 @@ public class BookTest {
     public void addingDuplicateChapterToTheBookShouldThrowAnException() {
         // arrange
         Book book = new Book(BOOK_NAME, BOOK_AUTHOR);
-        Chapter chapter = mock(Chapter.class);
 
         // act
-        book.addChapter(chapter);
-        book.addChapter(chapter);
+        book.addChapter(CHAPTER_NAME, CHAPTER_NUMBER);
+        book.addChapter(CHAPTER_NAME, CHAPTER_NUMBER);
     }
 
     @Test
-    // chaptersShouldBeSorted
     public void tableOfContentsShouldReturnASetOfSortedChapter() {
         // arrange
         Book book = new Book(BOOK_NAME, BOOK_AUTHOR);
 
-        Chapter c1 = new Chapter(CHAPTER_NAME, "2.2");
-        Chapter c2 = new Chapter(CHAPTER_NAME, "2.1");
-        Chapter c3 = new Chapter(CHAPTER_NAME, "3.4");
-        Chapter c4 = new Chapter(CHAPTER_NAME, "5.2");
+        book.addChapter(CHAPTER_NAME, "2.2");
+        book.addChapter(CHAPTER_NAME, "2.1");
+        book.addChapter(CHAPTER_NAME, "3.4");
+        book.addChapter(CHAPTER_NAME, "5.2");
 
-        book.addChapter(c1);
-        book.addChapter(c2);
-        book.addChapter(c3);
-        book.addChapter(c4);
-
-        // act
-        Collections.sort(expectedList);
-
-        book.getTableOfContents();
+        Set<Chapter> chapterSet = book.getTableOfContents();
 
         // assert
-        // make sure table of contents is sorted
-
     }
 
 
