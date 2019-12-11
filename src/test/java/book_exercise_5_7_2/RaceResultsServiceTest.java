@@ -46,4 +46,11 @@ public class RaceResultsServiceTest {
         verify(clientA).receive(message);
     }
 
+    @Test
+    public void unsubscribedClientShouldNotReceiveMessages() {
+        raceResults.addSubscriber(clientA);
+        raceResults.removeSubscriber(clientA);
+        raceResults.send(message);
+        verify(clientA, never()).receive(message);
+
 }

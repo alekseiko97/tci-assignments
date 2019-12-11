@@ -18,4 +18,7 @@ public class RaceResultsService {
             client.receive(message);
         }
     }
+
+    public void removeSubscriber(Client clientA) {
+    }
 }
