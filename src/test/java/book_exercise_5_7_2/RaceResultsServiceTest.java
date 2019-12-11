@@ -52,5 +52,6 @@ public class RaceResultsServiceTest {
         raceResults.removeSubscriber(clientA);
         raceResults.send(message);
         verify(clientA, never()).receive(message);
+    }
 
 }

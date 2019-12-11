@@ -19,6 +19,7 @@ public class RaceResultsService {
         }
     }
 
-    public void removeSubscriber(Client clientA) {
+    public void removeSubscriber(Client client) {
+        clients.remove(client);
     }
 }
