@@ -1,14 +1,19 @@
 package book_exercise_5_7_2;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class RaceResultsService {
 
-    private Client client;
+    private Collection<Client> clients = new ArrayList<Client>();
 
     public void addSubscriber(Client client) {
-        this.client = client;
+        clients.add(client);
     }
 
     public void send(Message message) {
-        client.receive(message);
+        for (Client client: clients) {
+            client.receive(message);
+        }
     }
 }
